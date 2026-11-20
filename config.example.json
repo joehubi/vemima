@@ -1,0 +1,23 @@
+{
+  "Cloud-Settings": {
+    "Host": "hubercloud",
+    "Port": 445,
+    "Share": "hubercloud",
+    "User": "benutzer",
+    "Password": "passwort"
+  },
+  "Server": {
+    "Port": 5000,
+    "AllowedClientIps": ["127.0.0.1", "192.168.178.31", "192.168.178.32"]
+  },
+  "Storage": {
+    "BaseFolder": "02_Haushalt\\vemima",
+    "ObjectFolder": "Riesenhaus",
+    "InboxFolder": "Eingang",
+    "BackupFolder": "Datenbank",
+    "BackupsToKeep": 5,
+    "MaxFileSizeMb": 100,
+    "AllowedExtensions": [".pdf", ".jpg", ".jpeg", ".png", ".heic", ".webp"]
+  },
+  "DatabasePath": "vemima.db"
+}

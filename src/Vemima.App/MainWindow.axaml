@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Vemima.App.MainWindow"
+        Title="Vemima"
+        Width="1100" Height="720" MinWidth="800" MinHeight="500">
+
+    <DockPanel>
+        <Border DockPanel.Dock="Bottom" Padding="12,6" BorderThickness="0,1,0,0"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <TextBlock x:Name="StatusText" Text="Starte …" />
+        </Border>
+
+        <TabControl Margin="8">
+            <TabItem Header="Rechnungen">
+                <TextBlock Margin="16" Text="Rechnungstabelle, Eingang und Prüfung folgen (Konzept 5.0)." />
+            </TabItem>
+            <TabItem Header="Mietkonto">
+                <TextBlock Margin="16" Text="Monatstabelle, Zahlungen und Mietverlauf folgen (Konzept 5.2)." />
+            </TabItem>
+            <TabItem Header="Nebenkosten">
+                <TextBlock Margin="16" Text="Abrechnung, Umlageschlüssel und PDF folgen (Konzept 5.3)." />
+            </TabItem>
+            <TabItem Header="Dokumente">
+                <TextBlock Margin="16" Text="Dokumentenablage folgt (Konzept 5.1)." />
+            </TabItem>
+            <TabItem Header="Einstellungen">
+                <TextBlock Margin="16" Text="Einstellungen folgen." />
+            </TabItem>
+            <TabItem Header="Log">
+                <TextBlock Margin="16" Text="Upload-Log folgt." />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

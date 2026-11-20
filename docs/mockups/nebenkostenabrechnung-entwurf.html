@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Nebenkostenabrechnung 2025 – Entwurf</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --teal: #0f5c63;
+    --teal-dark: #0a3f45;
+    --teal-soft: #e8f2f3;
+    --amber: #d9822b;
+    --amber-soft: #fdf0e1;
+    --green: #2f8f5b;
+    --green-soft: #e6f4ec;
+    --text: #1f2933;
+    --muted: #6b7782;
+    --line: #dde3e8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #cfd6dc; font-family: "Segoe UI", Arial, sans-serif; color: var(--text); font-size: 10pt; }
+  .page { width: 210mm; height: 297mm; margin: 8mm auto; background: #fff; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+  @media print { body { background: #fff; } .page { margin: 0; box-shadow: none; page-break-after: always; } }
+
+  .band { background: linear-gradient(135deg, var(--teal-dark), var(--teal)); color: #fff; padding: 14mm 18mm 10mm; }
+  .band .kicker { font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+  .band h1 { margin: 2mm 0 1mm; font-size: 25pt; font-weight: 600; }
+  .band .sub { font-size: 10.5pt; opacity: .9; }
+
+  .content { padding: 9mm 18mm 0; }
+  .meta { display: flex; justify-content: space-between; gap: 10mm; }
+  .sender { font-size: 7pt; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 1mm; margin-bottom: 2mm; display: inline-block; }
+  .address { line-height: 1.45; font-size: 10.5pt; }
+  .info { background: var(--teal-soft); border-radius: 3mm; padding: 4mm 5mm; min-width: 70mm; font-size: 9pt; }
+  .info dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 1.2mm 4mm; }
+  .info dt { color: var(--muted); }
+  .info dd { margin: 0; text-align: right; font-weight: 600; }
+
+  .result { margin: 8mm 0 7mm; border-radius: 4mm; padding: 6mm 7mm; display: flex; justify-content: space-between; align-items: center; background: var(--amber-soft); border-left: 2.5mm solid var(--amber); }
+  .result.credit { background: var(--green-soft); border-left-color: var(--green); }
+  .result .label { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .1em; color: var(--amber); font-weight: 600; }
+  .result.credit .label { color: var(--green); }
+  .result .amount { font-size: 28pt; font-weight: 700; color: var(--text); line-height: 1.1; }
+  .result .calc { text-align: right; font-size: 9pt; color: var(--muted); line-height: 1.6; }
+  .result .calc b { color: var(--text); }
+
+  h2 { font-size: 12pt; margin: 0 0 3mm; color: var(--teal); display: flex; align-items: center; gap: 2.5mm; }
+  h2::before { content: ""; width: 1.6mm; height: 5mm; background: var(--teal); border-radius: 1mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  th { text-align: left; font-weight: 600; font-size: 8.5pt; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; padding: 2mm 3mm; border-bottom: 1.5px solid var(--teal); }
+  td { padding: 2.4mm 3mm; border-bottom: 1px solid var(--line); }
+  tbody tr:nth-child(even) td { background: #f7fafb; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td .note { display: block; font-size: 8pt; color: var(--muted); }
+  .up { color: var(--amber); font-weight: 600; }
+  .flat { color: var(--muted); }
+  tfoot td { font-weight: 700; border-top: 1.5px solid var(--teal); border-bottom: none; background: var(--teal-soft); }
+  tfoot td:first-child { border-radius: 2mm 0 0 2mm; }
+  tfoot td:last-child { border-radius: 0 2mm 2mm 0; }
+
+  .calc-box { margin-top: 7mm; display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .card { border: 1px solid var(--line); border-radius: 3mm; padding: 4mm 5mm; }
+  .card h3 { margin: 0 0 2mm; font-size: 9pt; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .card .row { display: flex; justify-content: space-between; padding: 1mm 0; font-size: 9.5pt; }
+  .card .row.total { border-top: 1px solid var(--line); margin-top: 1mm; padding-top: 2mm; font-weight: 700; }
+
+  .newpay { background: var(--teal-soft); border-radius: 4mm; padding: 5mm 6mm; display: flex; justify-content: space-between; align-items: center; margin-top: 0; }
+  .newpay .big { font-size: 22pt; font-weight: 700; color: var(--teal-dark); }
+  .newpay .txt { font-size: 9.5pt; color: var(--muted); line-height: 1.5; }
+
+  .notice { margin-top: 6mm; font-size: 8.5pt; color: var(--muted); line-height: 1.55; }
+  .notice b { color: var(--text); }
+  .tax { margin-top: 5mm; border: 1px dashed var(--teal); border-radius: 3mm; padding: 3.5mm 5mm; font-size: 8.5pt; line-height: 1.5; }
+  .tax b { color: var(--teal-dark); }
+
+  .footer { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; border-top: 1px solid var(--line); padding-top: 3mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: var(--muted); }
+  .draft { position: absolute; top: 6mm; right: -13mm; transform: rotate(35deg); background: #fff3c4; color: #8a6d00; font-size: 8pt; font-weight: 700; padding: 1mm 14mm; letter-spacing: .1em; }
+</style>
+</head>
+<body>
+
+<!-- Seite 1: Ergebnis und Kosten -->
+<section class="page">
+  <div class="draft">ENTWURF</div>
+  <header class="band">
+    <div class="kicker">Betriebskosten</div>
+    <h1>Nebenkostenabrechnung 2025</h1>
+    <div class="sub">Abrechnungszeitraum 01.01.2025 – 31.12.2025</div>
+  </header>
+
+  <div class="content">
+    <div class="meta">
+      <div>
+        <div class="sender">Vermieter Mustermann · Musterweg 1 · 12345 Musterstadt</div>
+        <div class="address">
+          Herr Max Mustermann<br>
+          Beispielstraße 5<br>
+          12345 Beispielstadt
+        </div>
+      </div>
+      <div class="info">
+        <dl>
+          <dt>Objekt</dt><dd>Riesenhaus</dd>
+          <dt>Wohneinheit</dt><dd>Wohnung 1</dd>
+          <dt>Erstellt am</dt><dd>20.11.2026</dd>
+          <dt>Abrechnung</dt><dd>Nr. 2025-01</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="result">
+      <div>
+        <div class="label">Nachzahlung</div>
+        <div class="amount">516,00 €</div>
+      </div>
+      <div class="calc">
+        Ihre Kosten 2025 <b>1.536,00 €</b><br>
+        abzüglich Vorauszahlungen <b>1.020,00 €</b><br>
+        zu zahlen bis <b>15.12.2026</b>
+      </div>
+    </div>
+
+    <h2>Ihre Kosten 2025</h2>
+    <table>
+      <thead>
+        <tr><th>Posten</th><th class="num">Anteil</th><th class="num">Kosten</th><th class="num">zum Vorjahr</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Wartung Heizungsanlage inkl. Kamin<span class="note">Schornsteinfeger, 2 Rechnungen</span></td><td class="num">100 %</td><td class="num">132,35 €</td><td class="num flat">–</td></tr>
+        <tr><td>Kaltwasser / Abwasser<span class="note">Wasser, Schmutz- und Niederschlagswasser</span></td><td class="num">100 %</td><td class="num">474,68 €</td><td class="num up">+ 30,00 €</td></tr>
+        <tr><td>Grundsteuer</td><td class="num">100 %</td><td class="num">132,43 €</td><td class="num up">+ 65,00 €</td></tr>
+        <tr><td>Wohngebäudeversicherung</td><td class="num">100 %</td><td class="num">596,24 €</td><td class="num up">+ 196,00 €</td></tr>
+        <tr><td>Haus- und Grundbesitzerhaftpflicht</td><td class="num">100 %</td><td class="num">25,30 €</td><td class="num flat">–</td></tr>
+        <tr><td>Müllentsorgung (AVR)</td><td class="num">100 %</td><td class="num">175,00 €</td><td class="num up">+ 30,00 €</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="2">Summe Nebenkosten</td><td class="num">1.536,00 €</td><td></td></tr>
+      </tfoot>
+    </table>
+
+    <div class="calc-box">
+      <div class="card">
+        <h3>Abrechnung</h3>
+        <div class="row"><span>Nebenkosten 2025</span><span>1.536,00 €</span></div>
+        <div class="row"><span>Vorauszahlungen (12 × 85,00 €)</span><span>– 1.020,00 €</span></div>
+        <div class="row total"><span>Nachzahlung</span><span>516,00 €</span></div>
+      </div>
+      <div class="card">
+        <h3>Hinweise</h3>
+        <div class="row" style="font-size:8.5pt;color:var(--muted);line-height:1.5">
+          Die Belege zu dieser Abrechnung können Sie nach Absprache bei uns einsehen.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span>Vermieter Mustermann · Musterweg 1 · 12345 Musterstadt</span>
+    <span>Seite 1 von 2</span>
+  </footer>
+</section>
+
+<!-- Seite 2: Neue Vorauszahlung -->
+<section class="page">
+  <div class="draft">ENTWURF</div>
+  <header class="band">
+    <div class="kicker">Ausblick</div>
+    <h1>Neue Vorauszahlung</h1>
+    <div class="sub">Gültig ab 01.01.2027</div>
+  </header>
+
+  <div class="content">
+    <div class="newpay">
+      <div>
+        <div class="txt">Neue monatliche Vorauszahlung</div>
+        <div class="big">115,00 €</div>
+      </div>
+      <div class="txt" style="text-align:right">
+        bisher <b>85,00 €</b> pro Monat<br>
+        Erhöhung <b>+ 30,00 €</b> pro Monat
+      </div>
+    </div>
+
+    <h2 style="margin-top:8mm">Grundlage: Kosten 2025</h2>
+    <table>
+      <thead>
+        <tr><th>Posten</th><th class="num">pro Jahr</th><th class="num">pro Monat</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Wartung Heizungsanlage inkl. Kamin</td><td class="num">132,35 €</td><td class="num">11,03 €</td></tr>
+        <tr><td>Kaltwasser / Abwasser</td><td class="num">474,68 €</td><td class="num">39,56 €</td></tr>
+        <tr><td>Grundsteuer</td><td class="num">132,43 €</td><td class="num">11,04 €</td></tr>
+        <tr><td>Wohngebäudeversicherung</td><td class="num">596,24 €</td><td class="num">49,69 €</td></tr>
+        <tr><td>Haus- und Grundbesitzerhaftpflicht</td><td class="num">25,30 €</td><td class="num">2,11 €</td></tr>
+        <tr><td>Müllentsorgung (AVR)</td><td class="num">175,00 €</td><td class="num">14,58 €</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Summe Kosten 2025</td><td class="num">1.536,00 €</td><td class="num">128,00 €</td></tr>
+      </tfoot>
+    </table>
+
+    <div class="tax" style="border-style:solid;background:var(--teal-soft)">
+      <b>Festgelegte Vorauszahlung ab 01.01.2027:</b> 115,00 € pro Monat (1.380,00 € pro Jahr).
+    </div>
+
+    <div class="tax">
+      <b>Steuerlich absetzbar (§ 35a EStG):</b> Für Rechnungen mit Kennzeichen §35a (z. B. Wartung Heizungsanlage inkl. Kamin: 132,35 €) weist die Abrechnung den Betrag aus. Der Arbeitskostenanteil steht auf der jeweiligen Rechnung.
+    </div>
+
+    <div class="notice">
+      <b>Zahlung der Nachzahlung:</b> Bitte überweisen Sie 516,00 € bis zum 15.12.2026 auf das Konto
+      DE00 0000 0000 0000 0000 00 (Mustermann), Verwendungszweck „Nebenkosten 2025 Wohnung 1“.<br><br>
+      Bei Fragen zur Abrechnung melden Sie sich gern bei uns.
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span>Vermieter Mustermann · Musterweg 1 · 12345 Musterstadt</span>
+    <span>Seite 2 von 2</span>
+  </footer>
+</section>
+
+</body>
+</html>
